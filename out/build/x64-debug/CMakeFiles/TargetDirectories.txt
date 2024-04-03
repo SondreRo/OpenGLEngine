@@ -1,0 +1,3 @@
+D:/School/3DProg/MyProgrmaming/MainPrograms/OpenGL/CMakeMine/OpenGLEngine/out/build/x64-debug/CMakeFiles/OpenGLEngine.dir
+D:/School/3DProg/MyProgrmaming/MainPrograms/OpenGL/CMakeMine/OpenGLEngine/out/build/x64-debug/CMakeFiles/edit_cache.dir
+D:/School/3DProg/MyProgrmaming/MainPrograms/OpenGL/CMakeMine/OpenGLEngine/out/build/x64-debug/CMakeFiles/rebuild_cache.dir

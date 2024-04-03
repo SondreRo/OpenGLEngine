@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "D:/School/3DProg/MyProgrmaming/MainPrograms/OpenGL/CMakeMine/OpenGLEngine/out/build/x64-debug/CMakeFiles/OpenGLEngine.dir/embed.manifest"
