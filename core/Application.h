@@ -42,6 +42,9 @@ public:
 	//std::vector<Mesh*> mMeshes;
 	ShaderProgram shaderProgram;
 	Actor* GetActor(std::string ActorName);
+
+	bool EnableDrawDebugBefore = false;
+	bool EnableDrawDebugAfter = false;
 private:
 	Application() = default;
 	~Application() = default;

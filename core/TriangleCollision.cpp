@@ -14,15 +14,29 @@ float TriangleCollision::StartTriangleCollision(Mesh& inMesh, glm::vec3 pos)
 	for (auto tri : inMesh.triangles)
 	{
 		//Triangle tri = inMesh.triangles[0];
-
 		glm::vec3 test = Barycentric(tri, idkPos, height);
+
+
+
+
+		if (Application::get().EnableDrawDebugBefore)
+		{
+			glm::vec3 ofsett(0, 0.01, 0);
+			DrawLineTemp::DrawLine(tri.P1 + ofsett, tri.P2 + ofsett);
+			DrawLineTemp::DrawLine(tri.P2 + ofsett, tri.P3 + ofsett);
+			DrawLineTemp::DrawLine(tri.P3 + ofsett, tri.P1 + ofsett);
+			DrawLineTemp::DrawLine(tri.P1, tri.P1 + (glm::vec3(0, 2, 0) * test.x));
+			DrawLineTemp::DrawLine(tri.P2, tri.P2 + (glm::vec3(0, 2, 0) * test.y));
+			DrawLineTemp::DrawLine(tri.P3, tri.P3 + (glm::vec3(0, 2, 0) * test.z));
+		}
+
 
 		if (test.x >= 0 &&
 			test.y >= 0 &&
 			test.z >= 0)
 		{
-			bool Debug = false;
-			if (Debug)
+			
+			if (Application::get().EnableDrawDebugAfter)
 			{
 				glm::vec3 ofsett(0, 0.01, 0);
 				DrawLineTemp::DrawLine(tri.P1 + ofsett, tri.P2 + ofsett);
@@ -77,6 +91,8 @@ float TriangleCollision::StartTriangleCollision(Mesh& inMesh, glm::vec3 pos)
 	//	
 	//}
 	
+
+
 
 }
 

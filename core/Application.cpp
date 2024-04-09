@@ -16,7 +16,7 @@
 #include "assimp/code/Common/PolyTools.h"
 #include "glm/gtc/type_ptr.hpp"
 #include "TriangleCollision.h"
-
+#include <Enemy.h>
 
 void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -147,12 +147,15 @@ Mesh* Application::GetMesh(std::string meshName)
 void Application::SetupMeshes()
 {
 	Mesh* landscapeMesh = new Mesh();
-	landscapeMesh->mVertices = MeshGenerator::GeneratePlane(0, 20, 0, 20, 2);
+	landscapeMesh->mVertices = MeshGenerator::GeneratePlane(0, 40, 0, 40, 0.5);
 	landscapeMesh->GenerateTriangles();
 	mMeshes["LandscapeMesh"] = landscapeMesh;
 
 	Mesh* boxMesh = MeshGenerator::GenerateBox(glm::vec3(1), glm::vec3(0));
 	mMeshes["BoxMesh"] = boxMesh;
+
+	Mesh* characterMesh = MeshGenerator::GenerateBox(glm::vec3(0.5,1,0.5), glm::vec3(0));
+	mMeshes["CharacterMesh"] = characterMesh;
 
 }
 
@@ -184,7 +187,7 @@ void Application::SetupActors()
 
 	character = new Character();
 	character->Name = "Character";
-	character->SetupCharacterMesh(GetMesh("BoxMesh"));
+	character->SetupCharacterMesh(GetMesh("CharacterMesh"));
 	mActors["CharacterActor"] = character;
 	actors.push_back(character);
 
@@ -195,6 +198,14 @@ void Application::SetupActors()
 	//camActor->LocalTransform.SetPosition(glm::vec3(0, 2, 5));
 
 	character->Children.push_back(camActor);
+
+
+	Enemy* enemy = new Enemy();
+	enemy->Name = "Enemy";
+	enemy->SetupCharacterMesh(GetMesh("CharacterMesh"));
+	mActors["EnemyActor"] = enemy;
+	actors.push_back(enemy);
+	enemy->GlobalTransform.SetPosition(glm::vec3(30, 2, 30));
 
 }
 

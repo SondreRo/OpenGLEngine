@@ -35,6 +35,20 @@ void Character::processInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
         Jump();
 
+    if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
+        Application::get().EnableDrawDebugAfter = true;
+
+    if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
+        Application::get().EnableDrawDebugBefore = true;
+
+    if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
+    {
+        Application::get().EnableDrawDebugBefore = false;
+        Application::get().EnableDrawDebugAfter = false;
+    }
+     
+
+
 }
 
 void Character::mouseCallback(GLFWwindow* window, double xpos, double ypos)

@@ -18,12 +18,12 @@ include_directories(libs/assimp/include)
 
 # HeaderFiles
 set (HEADER_FILES
-core/Application.h "core/Window.h" "core/ShaderProgram.h" "core/Mesh.h" "core/Vertex.h" "core/Camera.h" "core/Transform.h" "core/MeshGenerator.h" "core/TriangleCollision.h" "core/Triangle.h" "core/DrawLineTemp.h" "core/Actor.h" "core/Component.h" "core/MeshComponent.h" "core/MeshActor.h" "core/Character.h" "core/CameraActor.h")
+core/Application.h "core/Window.h" "core/ShaderProgram.h" "core/Mesh.h" "core/Vertex.h" "core/Camera.h" "core/Transform.h" "core/MeshGenerator.h" "core/TriangleCollision.h" "core/Triangle.h" "core/DrawLineTemp.h" "core/Actor.h" "core/Component.h" "core/MeshComponent.h" "core/MeshActor.h" "core/Character.h" "core/CameraActor.h" "core/Enemy.h")
 
  # SourceFiles
 set (SRC_FILES
 includes/glad.c
-core/Application.cpp "core/Window.cpp" "core/ShaderProgram.cpp" "core/Mesh.cpp" "core/Camera.cpp" "core/MeshGenerator.cpp" "core/TriangleCollision.cpp" "core/Actor.cpp" "core/Component.cpp" "core/MeshActor.cpp" "core/MeshComponent.cpp" "core/Character.cpp" "core/CameraActor.cpp")
+core/Application.cpp "core/Window.cpp" "core/ShaderProgram.cpp" "core/Mesh.cpp" "core/Camera.cpp" "core/MeshGenerator.cpp" "core/TriangleCollision.cpp" "core/Actor.cpp" "core/Component.cpp" "core/MeshActor.cpp" "core/MeshComponent.cpp" "core/Character.cpp" "core/CameraActor.cpp" "core/Enemy.cpp")
 
 add_subdirectory(libs/glfw-3.3.9)
 
