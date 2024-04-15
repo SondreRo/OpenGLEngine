@@ -7,5 +7,5 @@ public:
 	Enemy();
 	virtual void Update(glm::mat4 ParentMat) override;
 	void EnemyUpdate();
-	
+	bool Active = false;
 };

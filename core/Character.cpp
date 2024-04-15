@@ -47,6 +47,10 @@ void Character::processInput(GLFWwindow* window)
         Application::get().EnableDrawDebugAfter = false;
     }
      
+    if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
+    {
+    	Application::get().line_mesh->AddLine(Vertex(GlobalTransform.GetPosition()), Vertex(glm::vec3(0)));
+    }
 
 
 }
@@ -121,8 +125,8 @@ void Character::Update(glm::mat4 ParentMat)
 	LocalTransform.AddPosition(Velocity * (Application::get().deltaTime * CharacterSpeed));
 	Velocity *= (1.f - (5 * (Application::get().deltaTime)));
 
-    Mesh* LandScapeMesh = dynamic_cast<MeshActor*>(Application::get().GetActor("LandScapeMeshActor"))->meshComponent->mesh;
-    float height = TriangleCollision::StartTriangleCollision(*LandScapeMesh, GlobalTransform.GetPosition() - glm::vec3(0, 1, 0));
+    Mesh* LandScapeMesh = Application::get().GetMesh("LandscapeMesh");
+    float height = TriangleCollision::StartTriangleCollision(LandScapeMesh, GlobalTransform.GetPosition() - glm::vec3(0, 1, 0));
     onFloor = (height >= GlobalTransform.GetPosition().y - 0.5);
     //std::cout << onFloor << std::endl;
 

@@ -4,14 +4,14 @@
 
 
 
-float TriangleCollision::StartTriangleCollision(Mesh& inMesh, glm::vec3 pos)
+float TriangleCollision::StartTriangleCollision(Mesh* inMesh, glm::vec3 pos)
 {
 	float height = 0;
 	
 	glm::vec3 idkPos(pos.x, pos.z, pos.y);
+	std::cout << "TRIANGLE " << inMesh->triangles.size() << std::endl;
 
-
-	for (auto tri : inMesh.triangles)
+	for (auto tri : inMesh->triangles)
 	{
 		//Triangle tri = inMesh.triangles[0];
 		glm::vec3 test = Barycentric(tri, idkPos, height);
@@ -22,12 +22,14 @@ float TriangleCollision::StartTriangleCollision(Mesh& inMesh, glm::vec3 pos)
 		if (Application::get().EnableDrawDebugBefore)
 		{
 			glm::vec3 ofsett(0, 0.01, 0);
-			DrawLineTemp::DrawLine(tri.P1 + ofsett, tri.P2 + ofsett);
-			DrawLineTemp::DrawLine(tri.P2 + ofsett, tri.P3 + ofsett);
-			DrawLineTemp::DrawLine(tri.P3 + ofsett, tri.P1 + ofsett);
-			DrawLineTemp::DrawLine(tri.P1, tri.P1 + (glm::vec3(0, 2, 0) * test.x));
-			DrawLineTemp::DrawLine(tri.P2, tri.P2 + (glm::vec3(0, 2, 0) * test.y));
-			DrawLineTemp::DrawLine(tri.P3, tri.P3 + (glm::vec3(0, 2, 0) * test.z));
+
+			Application::get().line_mesh->AddLine(tri.P1 + ofsett, tri.P2 + ofsett);
+			Application::get().line_mesh->AddLine(tri.P2 + ofsett, tri.P3 + ofsett);
+			Application::get().line_mesh->AddLine(tri.P3 + ofsett, tri.P1 + ofsett);
+			Application::get().line_mesh->AddLine(tri.P1, tri.P1 + (glm::vec3(0, 1, 0) * test.x));
+			Application::get().line_mesh->AddLine(tri.P2, tri.P2 + (glm::vec3(0, 1, 0) * test.y));
+			Application::get().line_mesh->AddLine(tri.P3, tri.P3 + (glm::vec3(0, 1, 0) * test.z));
+
 		}
 
 
@@ -39,12 +41,13 @@ float TriangleCollision::StartTriangleCollision(Mesh& inMesh, glm::vec3 pos)
 			if (Application::get().EnableDrawDebugAfter)
 			{
 				glm::vec3 ofsett(0, 0.01, 0);
-				DrawLineTemp::DrawLine(tri.P1 + ofsett, tri.P2 + ofsett);
-				DrawLineTemp::DrawLine(tri.P2 + ofsett, tri.P3 + ofsett);
-				DrawLineTemp::DrawLine(tri.P3 + ofsett, tri.P1 + ofsett);
-				DrawLineTemp::DrawLine(tri.P1, tri.P1 + (glm::vec3(0, 2, 0) * test.x));
-				DrawLineTemp::DrawLine(tri.P2, tri.P2 + (glm::vec3(0, 2, 0) * test.y));
-				DrawLineTemp::DrawLine(tri.P3, tri.P3 + (glm::vec3(0, 2, 0) * test.z));
+				Application::get().line_mesh->AddLine(tri.P1 + ofsett, tri.P2 + ofsett);
+				Application::get().line_mesh->AddLine(tri.P2 + ofsett, tri.P3 + ofsett);
+				Application::get().line_mesh->AddLine(tri.P3 + ofsett, tri.P1 + ofsett);
+				Application::get().line_mesh->AddLine(tri.P1, tri.P1 + (glm::vec3(0, 1, 0) * test.x));
+				Application::get().line_mesh->AddLine(tri.P2, tri.P2 + (glm::vec3(0, 1, 0) * test.y));
+				Application::get().line_mesh->AddLine(tri.P3, tri.P3 + (glm::vec3(0, 1, 0) * test.z));
+
 			}
 			
 			//std::cout << height << " " << pos.y << std::endl;
@@ -140,7 +143,7 @@ glm::vec3 TriangleCollision::Barycentric(Triangle& triangle, glm::vec3 pos, floa
 	float zCoord = U * P.z + V * Q.z + W * R.z;
 
 	
-	height = zCoord + 0.5;
+	height = zCoord + 0.5f;
 
 	return glm::vec3(U, V, W);
 

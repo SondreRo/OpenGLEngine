@@ -15,7 +15,7 @@ void Enemy::Update(glm::mat4 ParentMat)
 
 void Enemy::EnemyUpdate()
 {
-
+	if (!Active) return;
 	glm::vec3 PlayerPos = Application::get().character->GlobalTransform.GetPosition();
 	glm::vec3 DirectionVector = PlayerPos - GlobalTransform.GetPosition();
 

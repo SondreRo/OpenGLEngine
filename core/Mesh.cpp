@@ -7,7 +7,7 @@
 
 Mesh::~Mesh()
 {
-	std::cout << "Hello" << std::endl;
+	//std::cout << "Hello" << std::endl;
 }
 
 int Mesh::Bind()
@@ -42,6 +42,7 @@ int Mesh::Bind()
 
 void Mesh::Draw(ShaderProgram shader_program, bool DrawDots, glm::mat4 matrix)
 {
+	std::cout << VBO << " " << triangles.size() << std::endl;
 	glEnable(GL_DEPTH_TEST);
 	shader_program.UseProgram();
 

@@ -16,9 +16,9 @@ public:
 
 	std::vector<Vertex> mVertices;
 	std::vector<unsigned int> mIndices;
-	int Bind();
-	void Draw(ShaderProgram shader_program, bool DrawDots, glm::mat4 matrix);
-	void Tick(float deltaTime);
+	virtual int Bind();
+	virtual void Draw(ShaderProgram shader_program, bool DrawDots, glm::mat4 matrix);
+	virtual void Tick(float deltaTime);
 	Transform GlobalTransform;
 	std::vector <Triangle> triangles;
 	void GenerateTriangles();

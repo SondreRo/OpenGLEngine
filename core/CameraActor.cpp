@@ -41,8 +41,8 @@ void CameraActor::RenderFromCamera(ShaderProgram shader_program)
     //glm::mat4 view = ;
     
 
-    int screenWidth = Application::get().window->Width;
-    int screenHeight = Application::get().window->Height;
+    int screenWidth = Application::get().mWindow->Width;
+    int screenHeight = Application::get().mWindow->Height;
 
     float screenWidthf = static_cast<float>(screenWidth);
     float screenHeightf = static_cast<float>(screenHeight);
