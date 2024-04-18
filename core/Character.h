@@ -16,7 +16,7 @@ class Character : public Actor {
 	Character();
 	MeshComponent* CharacterMesh;
 	void SetupCharacterMesh(Mesh* NewMesh);
-	void processInput(class GLFWwindow* window);
+	void processInput(struct GLFWwindow* window);
 	void mouseCallback(GLFWwindow* window, double xpos, double ypos);
 	void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 

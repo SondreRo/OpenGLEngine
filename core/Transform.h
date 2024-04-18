@@ -45,6 +45,16 @@ struct Transform
         AddRotation(pitchRotation);
     }
 
+    void AddRoll(float angleDegrees)
+    {
+        float angleRadians = glm::radians(angleDegrees);
+        glm::vec3 rightVector = glm::rotate(mRotation, glm::vec3(0.0f, 0.0f, 10.0f));
+        glm::quat rollRotation = glm::angleAxis(angleRadians, rightVector);
+        //AddRotation(rollRotation);
+    }
+
+
+
     // Setters
     void SetPosition(const glm::vec3& pos) { mPosition = pos; }
     void SetRotation(const glm::quat& rot) { mRotation = rot; }
@@ -109,6 +119,13 @@ struct Transform
         glm::vec3 eulerAngles = glm::eulerAngles(mRotation);
         float yaw = eulerAngles.y;
         return glm::degrees(yaw);
+    }
+
+    float GetCurrentRoll() const
+    {
+        glm::vec3 eulerAngles = glm::eulerAngles(mRotation);
+        float roll = eulerAngles.z;
+        return glm::degrees(roll);
     }
 
     glm::mat4 GetTransformMatrix() const

@@ -20,7 +20,6 @@
 
 
 
-
 Application& Application::get()
 {
 	if (nullptr == instance)
@@ -36,7 +35,6 @@ int Application::init()
 	mWindow = new Window();
 
 	mWindow->CreatemyWindow();
-
 	
 	shaderProgram.ReadShaderFile(SOURCE_DIRECTORY("core/shaders/VertexShader.txt"), SOURCE_DIRECTORY("core/shaders/FragmentShader.txt"));
 	shaderProgram.CompileShaders();
@@ -49,6 +47,8 @@ int Application::init()
 	glfwSetWindowUserPointer(mWindow->mWindow, this);
 
 	SetupCallbacks();
+
+	//ImGui_ImplGlfw_InstallCallbacks(mWindow->mWindow);
 
 
 	SetupMeshes();
@@ -72,20 +72,27 @@ int Application::Run()
 
 	curve_mesh->Bind();
 
-
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glFrontFace(GL_CW);
 
 	while (!glfwWindowShouldClose(mWindow->mWindow))
 	{
+	
+
+
+
+
+		
+	
 		mWindow->StartFrame();
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_FRONT);
+		processInput(mWindow->mWindow);
 		//system("cls");
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
 		x += deltaTime;
-		processInput(mWindow->mWindow);
 		glClearColor(0.5f, 0.5f, 1, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClear(GL_DEPTH_BUFFER_BIT);
@@ -120,19 +127,19 @@ int Application::Run()
 		Actor* temp1 = GetActor("EnemyActor");
 		Actor* temp2 = GetActor("CharacterActor");
 
-		if (temp1 && temp2)
-		{
-			glm::vec3 p1 = temp1->GlobalTransform.GetPosition();
-			glm::vec3 p3 = temp2->GlobalTransform.GetPosition();
+		//if (temp1 && temp2)
+		//{
+		//	glm::vec3 p1 = temp1->GlobalTransform.GetPosition();
+		//	glm::vec3 p3 = temp2->GlobalTransform.GetPosition();
 
 
-			float Distance = glm::length(p3 - p1);
-			glm::vec3 p2 = ((p1 * .5f) + (p3 * .5f)) + glm::vec3(0, Distance, 0);
+		//	float Distance = glm::length(p3 - p1);
+		//	glm::vec3 p2 = ((p1 * .5f) + (p3 * .5f)) + glm::vec3(0, Distance, 0);
 
-			
-			curve_mesh->DrawLine(p1, p2, p3, 0.01);
-			curve_mesh->Draw(LineshaderProgram, false, glm::mat4(2));
-		}
+		//	
+		//	curve_mesh->DrawLine(p1, p2, p3, 0.01);
+		//	curve_mesh->Draw(LineshaderProgram, false, glm::mat4(2));
+		//}
 
 		
 
@@ -146,8 +153,10 @@ int Application::Run()
 		{
 			actor->Render();
 		}
-
-	
+		
+		//std::cout << ImGui::GetIO().WantCaptureMouse << std::endl;
+		//std::cout << ImGui::GetIO().WantCaptureKeyboard << std::endl;
+		
 		
 		//SceneTransform.AddPosition(glm::vec3(0, 0, 0.5 * deltaTime));
 		//SceneTransform.AddYaw(20*deltaTime);
@@ -188,16 +197,52 @@ Mesh* Application::GetMesh(std::string meshName)
 
 void Application::SetupMeshes()
 {
+
 	Mesh* landscapeMesh = new Mesh();
-	landscapeMesh->mVertices = MeshGenerator::GeneratePlane(0, 40, 0, 40, 2);
+	landscapeMesh->mVertices = MeshGenerator::GeneratePlane(0, 40, 0, 40, 2, 1);
 	landscapeMesh->GenerateTriangles();
+	landscapeMesh->DisplayName = "LandscapeMesh";
 	mMeshes["LandscapeMesh"] = landscapeMesh;
 
 	Mesh* boxMesh = MeshGenerator::GenerateBox(glm::vec3(1), glm::vec3(0));
+	boxMesh->DisplayName = "BoxMesh";
 	mMeshes["BoxMesh"] = boxMesh;
 
 	Mesh* characterMesh = MeshGenerator::GenerateBox(glm::vec3(0.5,1,0.5), glm::vec3(0));
+	characterMesh->DisplayName = "CharacterMesh";
 	mMeshes["CharacterMesh"] = characterMesh;
+
+
+	Mesh* monkeyMesh = mesh_importer.ImportAssimp(SOURCE_DIRECTORY("Meshes/Suzanne.fbx"));
+	monkeyMesh->DisplayName = "MonkeyMesh";
+	mMeshes["MonkeyMesh"] = monkeyMesh;
+
+	Mesh* houseMesh = mesh_importer.ImportAssimp(SOURCE_DIRECTORY("Meshes/House.fbx"));
+	houseMesh->DisplayName = "HouseMesh";
+	mMeshes["HouseMesh"] = houseMesh;
+
+	Mesh* blenderBoxMesh = mesh_importer.ImportAssimp(SOURCE_DIRECTORY("Meshes/Box.fbx"));
+	blenderBoxMesh->DisplayName = "blenderBoxMesh";
+	mMeshes["blenderBoxMesh"] = blenderBoxMesh;
+
+	Mesh* triangleMesh = new Mesh();
+	triangleMesh->mVertices = {
+		Vertex(glm::vec3(-0.5,-0.5,0), glm::vec3(0,1,0)),
+		Vertex(glm::vec3(0.5,-0.5,0), glm::vec3(0,1,0)),
+		Vertex(glm::vec3(0,0.5,0), glm::vec3(0,1,0))};
+
+	triangleMesh->DisplayName = "TriangleMesh";
+	triangleMesh->mIndices = { 0,1,2 };
+	triangleMesh->UseElements = true;
+	mMeshes["TriangleMesh"] = triangleMesh;
+
+
+	Mesh* pawnTextureThingyMesh = mesh_importer.ImportAssimp("C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx");
+	pawnTextureThingyMesh->DisplayName = "pawnTextureThingyMesh";
+	mMeshes["pawnTextureThingyMesh"] = pawnTextureThingyMesh;
+
+
+
 
 
 	line_mesh = new LineMesh();
@@ -225,14 +270,32 @@ void Application::SetupActors()
 	mActors["LandScapeMeshActor"] = LandScapeMeshActor;
 	actors.push_back(LandScapeMeshActor);
 
-	MeshActor* BoxActor = new MeshActor();
-	BoxActor->Name = "BoxActor";
-	BoxActor->SetupMesh(GetMesh("BoxMesh"));
-	BoxActor->LocalTransform.AddPosition(glm::vec3(10, 1, 10));
-	mActors["BoxMeshActor"] = BoxActor;
+	MeshActor* MonkeyActor = new MeshActor();
+	MonkeyActor->Name = "MonkeyActor";
+	MonkeyActor->SetupMesh(GetMesh("MonkeyMesh"));
+	MonkeyActor->LocalTransform.AddPosition(glm::vec3(10, 1, 10));
+	mActors["MonkeyActor"] = MonkeyActor;
+	LandScapeMeshActor->Children.push_back(MonkeyActor);
 
-	LandScapeMeshActor->Children.push_back(BoxActor);
+	MeshActor* houseActor = new MeshActor();
+	houseActor->Name = "HouseActor";
+	houseActor->SetupMesh(GetMesh("HouseMesh"));
+	houseActor->LocalTransform.AddPosition(glm::vec3(15, 1, 5));
+	mActors["HouseActor"] = houseActor;
+	LandScapeMeshActor->Children.push_back(houseActor);
 
+	MeshActor* blenderBoxActor = new MeshActor();
+	blenderBoxActor->Name = "blenderBoxActor";
+	blenderBoxActor->SetupMesh(GetMesh("blenderBoxMesh"));
+	blenderBoxActor->LocalTransform.AddPosition(glm::vec3(20, 1, 5));
+	mActors["blenderBoxActor"] = blenderBoxActor;
+	LandScapeMeshActor->Children.push_back(blenderBoxActor);
+
+	MeshActor* TriangleActor = new MeshActor();
+	TriangleActor->Name = "TriangleActor";
+	TriangleActor->SetupMesh(GetMesh("TriangleMesh"));
+	mActors["TriangleActor"] = TriangleActor;
+	LandScapeMeshActor->Children.push_back(TriangleActor);
 
 	character = new Character();
 	character->Name = "Character";
@@ -288,6 +351,12 @@ void Application::SetupCallbacks()
 		if (app) app->KeyCallback(window, key, scancode, action, mods);
 		});
 
+	glfwSetCharCallback(mWindow->mWindow, [](GLFWwindow* window, unsigned int c) {
+		auto app = reinterpret_cast<Application*>(glfwGetWindowUserPointer(window));
+		if (app) app->CharCallback(window, c);
+		});
+
+
 	//glfwSetFramebufferSizeCallback(window->mWindow, framebuffer_size_callback);
 	//glfwSetCursorPosCallback(window->mWindow,mouse_callback);
 	//glfwSetMouseButtonCallback(window->mWindow, MouseButtonCallback);
@@ -298,6 +367,8 @@ void Application::SetupCallbacks()
 
 void Application::processInput(GLFWwindow* window)
 {
+
+	if (ImGui::GetIO().WantCaptureKeyboard) return;
 	if (character)
 		character->processInput(window);
 
@@ -354,11 +425,25 @@ void Application::MouseScrollCallback(GLFWwindow* window, double xoffset, double
 void Application::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	mWindow->WindowKeyCallback(key, scancode, action, mods);
+
+	//if (action == 1)
+	//{
+	//	std::cout << key << std::endl;
+
+	//}
+	
 	//mWindow->PrintHello();
+}
+
+void Application::CharCallback(GLFWwindow* window, unsigned c)
+{
+	mWindow->WindowCharCallback(window, c);
 }
 
 void Application::MouseMoveCallback(GLFWwindow* window, double xpos, double ypos)
 {
+	if (ImGui::GetIO().WantCaptureMouse) return;
+
 	character->mouseCallback(window, xpos, ypos);
 	mWindow->WindowMouseMoveCallback(xpos, ypos);
 }
@@ -371,12 +456,28 @@ void Application::FramebufferSizeCallback(GLFWwindow* window, int width, int hei
 	glViewport(0, 0, width, height);
 }
 
-void Application::RemakeLandscape(float maxX, float maxY, float delta)
+void Application::RemakeLandscape(float maxX, float maxY, float delta, int type)
 {
 	Mesh* lm = GetMesh("LandscapeMesh");
-	lm->mVertices = MeshGenerator::GeneratePlane(0, maxX, 0, maxY, delta);
+	lm->mVertices = MeshGenerator::GeneratePlane(0, maxX, 0, maxY, delta, type);
 	lm->GenerateTriangles();
-
-	lm->Bind();
+	lm->RebindVertex();
 	
+}
+
+Mesh* Application::CreateAndRegisterMesh(std::string Path, std::string DisplayName)
+{
+	Mesh* newMesh = mesh_importer.ImportAssimp(Path);
+
+	if (!DisplayName.empty())
+	{
+		newMesh->DisplayName = DisplayName;
+
+	}
+
+	mMeshes[newMesh->DisplayName] = newMesh;
+
+
+	newMesh->Bind();
+	return newMesh;
 }

@@ -11,7 +11,7 @@
 
 #include "Application.h"
 #include "Window.h"
-#include "assimp/code/Common/Win32DebugLogStream.h"
+
 
 
 void Camera::RecalculateDirections()
@@ -46,6 +46,7 @@ void Camera::RenderFromCamera(ShaderProgram shader_program)
     glUniformMatrix4fv(test1, 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(test2, 1, GL_FALSE, glm::value_ptr(projection));
     glUniform3fv(test3, 1, glm::value_ptr(cameraPos));
+
 }
 
 void Camera::processInput(GLFWwindow* window)

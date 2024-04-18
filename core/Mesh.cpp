@@ -3,7 +3,15 @@
 #include <glad/glad.h>
 #include <ShaderProgram.h>
 
+#include "Application.h"
 #include "glm/gtc/type_ptr.inl"
+
+Mesh::Mesh(std::vector<Vertex> inVertex, std::vector<unsigned> inIndices, std::vector<Texture> inTextures)
+{
+	mVertices = inVertex;
+	mIndices = inIndices;
+	mTextures = inTextures;
+}
 
 Mesh::~Mesh()
 {
@@ -35,20 +43,41 @@ int Mesh::Bind()
 
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, mNormal));
 	glEnableVertexAttribArray(1);
-	
 
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, mTexCoord));
+	glEnableVertexAttribArray(2);
+
+	return 1;
+}
+
+int Mesh::RebindVertex()
+{
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, mVertices.size() * sizeof(Vertex), mVertices.data(), GL_DYNAMIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mIndices.size() * sizeof(unsigned int), mIndices.data(), GL_STATIC_DRAW);
 	return 1;
 }
 
 void Mesh::Draw(ShaderProgram shader_program, bool DrawDots, glm::mat4 matrix)
 {
-	std::cout << VBO << " " << triangles.size() << std::endl;
 	glEnable(GL_DEPTH_TEST);
 	shader_program.UseProgram();
 
 	glUniformMatrix4fv(glGetUniformLocation(shader_program.shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(matrix));
+	glUniform1i(glGetUniformLocation(shader_program.shaderProgram, "useTexture"), (int)!mTextures.empty());
+	material.BindMaterial(shader_program);
 
-
+	for (auto texture : mTextures)
+	{
+		glBindTexture(GL_TEXTURE_2D, texture.id);
+	}
+	if (mTextures.empty())
+	{
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 	
 	glBindVertexArray(VAO);
 	glPointSize(10);
@@ -99,6 +128,7 @@ void Mesh::Tick(float deltaTime)
 
 void Mesh::GenerateTriangles()
 {
+	triangles.clear();
 	for (int i = 0; i < mVertices.size(); i += 3)
 	{
 		if (i+2 > mVertices.size())
@@ -110,4 +140,9 @@ void Mesh::GenerateTriangles()
 
 	}
 	std::cout << triangles.size() << " triangles generated" << std::endl;
+}
+
+void Mesh::ReimportMesh()
+{
+	Application::get().CreateAndRegisterMesh(path, DisplayName);
 }

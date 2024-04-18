@@ -125,8 +125,8 @@ void Character::Update(glm::mat4 ParentMat)
 	LocalTransform.AddPosition(Velocity * (Application::get().deltaTime * CharacterSpeed));
 	Velocity *= (1.f - (5 * (Application::get().deltaTime)));
 
-    Mesh* LandScapeMesh = Application::get().GetMesh("LandscapeMesh");
-    float height = TriangleCollision::StartTriangleCollision(LandScapeMesh, GlobalTransform.GetPosition() - glm::vec3(0, 1, 0));
+    Actor* LandScapeActor = Application::get().GetActor("LandScapeMeshActor");
+    float height = TriangleCollision::StartTriangleCollision(LandScapeActor, GlobalTransform.GetPosition() - glm::vec3(0, 1, 0));
     onFloor = (height >= GlobalTransform.GetPosition().y - 0.5);
     //std::cout << onFloor << std::endl;
 

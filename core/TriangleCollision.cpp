@@ -3,16 +3,35 @@
 #include <DrawLineTemp.h>
 
 
-
-float TriangleCollision::StartTriangleCollision(Mesh* inMesh, glm::vec3 pos)
+float TriangleCollision::StartTriangleCollision(Actor* inLandscape, glm::vec3 pos)
 {
 	float height = 0;
-	
+
 	glm::vec3 idkPos(pos.x, pos.z, pos.y);
-	std::cout << "TRIANGLE " << inMesh->triangles.size() << std::endl;
+
+	MeshComponent* mc;
+
+	for (auto component : inLandscape->components)
+	{
+		mc = dynamic_cast<MeshComponent*>(component);
+		if (mc)
+		{
+			break;
+		}
+	}
+
+	if (!mc) return 0;
+
+	//
+
+	
+	Mesh* inMesh = mc->mesh;
 
 	for (auto tri : inMesh->triangles)
 	{
+		tri.P1 += inLandscape->GlobalTransform.GetPosition();
+		tri.P2 += inLandscape->GlobalTransform.GetPosition();
+		tri.P3 += inLandscape->GlobalTransform.GetPosition();
 		//Triangle tri = inMesh.triangles[0];
 		glm::vec3 test = Barycentric(tri, idkPos, height);
 
@@ -107,6 +126,10 @@ glm::vec3 TriangleCollision::Barycentric(Triangle& triangle, glm::vec3 pos, floa
 	glm::vec3 R = triangle.P3;
 	glm::vec3 p = pos;
 
+	P.y = 0;
+	Q.y = 0;
+	R.y = 0;
+
 	//p.y = 0;
 	//R.y = 0;
 	//R.y = 0;
@@ -126,13 +149,19 @@ glm::vec3 TriangleCollision::Barycentric(Triangle& triangle, glm::vec3 pos, floa
 	float U = (glm::cross(Q - pos, R - pos).z) / Ar;
 	float V = (glm::cross(R - pos, P - pos).z) / Ar;
 	float W = (glm::cross(P - pos, Q - pos).z) / Ar;
-	//W = 1 - (U + V);
+	//1float W = 1 - (U + V);
 
 	glm::vec3 a = P;
 	glm::vec3 b = Q;
 	glm::vec3 c = R;
 
+	P = triangle.P1;
+	Q = triangle.P2;
+	R = triangle.P3;
 
+	Switch(P);
+	Switch(Q);
+	Switch(R);
 	//float determinant = (b.z - c.z) * (a.x - c.x) + (c.x - b.x) * (a.z - c.z);
  //   float lambda1 = ((b.z - c.z) * (pos.x - c.x) + (c.x - b.x) * (pos.y - c.z)) / determinant;
  //   float lambda2 = ((c.z - a.z) * (pos.x - c.x) + (a.x - c.x) * (pos.y - c.z)) / determinant;

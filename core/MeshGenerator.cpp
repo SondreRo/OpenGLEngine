@@ -1,11 +1,22 @@
 #include <MeshGenerator.h>
 
-#include "assimp/contrib/poly2tri/poly2tri/common/shapes.h"
 #include <iostream>
 
-float MeshGenerator::Function(float X, float Y)
+float MeshGenerator::Function1(float X, float Y)
 {
 	return sin(X/2) + cos(Y/2);
+}
+float MeshGenerator::Function2(float X, float Y)
+{
+	return sin(X/4)*4;
+}
+float MeshGenerator::Function3(float X, float Y)
+{
+	return cos((X * (Y / 10) )/5) + sin(Y/10)/5;
+}
+float MeshGenerator::Function4(float X, float Y)
+{
+	return (pow(X, -1) + (pow(Y, 2) / 10))/20;
 }
 
 glm::vec3 MeshGenerator::GetNormal(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3)
@@ -22,7 +33,7 @@ glm::vec3 MeshGenerator::GetNormal(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3)
 	//return glm::vec3(nX, nY, nZ);
 }
 
-std::vector<Vertex> MeshGenerator::GeneratePlane(float MinX, float MaxX, float MinZ, float MaxZ, float StepSize)
+std::vector<Vertex> MeshGenerator::GeneratePlane(float MinX, float MaxX, float MinZ, float MaxZ, float StepSize, int type)
 {
 	std::vector<Vertex> vertices;
 
@@ -49,10 +60,34 @@ std::vector<Vertex> MeshGenerator::GeneratePlane(float MinX, float MaxX, float M
 			y3 = Y + (StepSize / 2); // Top Left
 			y4 = Y + (StepSize / 2); // Top Right
 
-			z1 = Function(x1, y1); // Bot Left
-			z2 = Function(x2, y2); // Bot Right
-			z3 = Function(x3, y3); // Top Left
-			z4 = Function(x4, y4); // Top Right
+			switch (type)
+			{
+			case 1:
+				z1 = Function1(x1, y1); // Bot Left
+				z2 = Function1(x2, y2); // Bot Right
+				z3 = Function1(x3, y3); // Top Left
+				z4 = Function1(x4, y4); // Top Right
+				break;
+			case 2:
+				z1 = Function2(x1, y1); // Bot Left
+				z2 = Function2(x2, y2); // Bot Right
+				z3 = Function2(x3, y3); // Top Left
+				z4 = Function2(x4, y4); // Top Right
+				break;
+			case 3:
+				z1 = Function3(x1, y1); // Bot Left
+				z2 = Function3(x2, y2); // Bot Right
+				z3 = Function3(x3, y3); // Top Left
+				z4 = Function3(x4, y4); // Top Right
+				break;
+			case 4:
+				z1 = Function4(x1, y1); // Bot Left
+				z2 = Function4(x2, y2); // Bot Right
+				z3 = Function4(x3, y3); // Top Left
+				z4 = Function4(x4, y4); // Top Right
+				break;
+			}
+
 
 			glm::vec3 p1 = glm::vec3(x1, z1, y1);
 			glm::vec3 p2 = glm::vec3(x2, z2, y2);

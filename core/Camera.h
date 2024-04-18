@@ -3,7 +3,7 @@
 
 
 class ShaderProgram;
-class GLFWwindow;
+struct GLFWwindow;
 
 class Camera {
 

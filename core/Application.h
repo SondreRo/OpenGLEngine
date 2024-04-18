@@ -9,6 +9,7 @@
 #include <LineMesh.h>
 #include "CameraActor.h"
 #include "CurveMesh.h"
+#include "MeshImporter.h"
 #include "Window.h"
 
 class Application {
@@ -40,9 +41,9 @@ public:
 	std::unordered_map <std::string, Actor*> mActors; 
 
 	Camera defaultCamera;
-	Character* character;
-	CameraActor* camActor;
-	Window* mWindow;
+	Character* character = nullptr;
+	CameraActor* camActor = nullptr;
+	Window* mWindow = nullptr;
 
 	//std::vector<Mesh*> mMeshes;
 	ShaderProgram shaderProgram;
@@ -57,14 +58,22 @@ public:
 	void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 	void MouseScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 	void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	void CharCallback(GLFWwindow* window, unsigned int c);
 	void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
 
-	float AverageFrameRate;
-	void RemakeLandscape(float maxX, float maxY, float delta);
+
+	float AverageFrameRate = 0;
+	void RemakeLandscape(float maxX, float maxY, float delta, int type);
+
+	Mesh* CreateAndRegisterMesh(std::string Path, std::string DisplayName = "");
+
 private:
 	Application() = default;
 	~Application() = default;
 	inline static Application* instance = nullptr;
+
+	MeshImporter mesh_importer;
+
 
 
 	void SetupMeshes();
@@ -72,7 +81,7 @@ private:
 	void SetupActors();
 
 	void SetupCallbacks();
-	void processInput(class GLFWwindow* window);
+	void processInput(struct  GLFWwindow* window);
 
 	void Cleanup();
 	std::vector<float> frames;

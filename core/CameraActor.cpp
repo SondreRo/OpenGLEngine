@@ -1,3 +1,5 @@
+
+
 #include <CameraActor.h>
 #include <iostream>
 
@@ -52,15 +54,26 @@ void CameraActor::RenderFromCamera(ShaderProgram shader_program)
     aspect = abs(aspect);
     //std::cout << aspect << std::endl;
 
+    
     glm::mat4 projection = glm::perspective(glm::radians(90.f), aspect, 0.1f, 100.0f);
 
-
+    
     unsigned int test1 = glGetUniformLocation(shader_program.shaderProgram, "view");
     unsigned int test2 = glGetUniformLocation(shader_program.shaderProgram, "projection");
     unsigned int test3 = glGetUniformLocation(shader_program.shaderProgram, "viewPos");
-    glUniformMatrix4fv(test1, 1, GL_FALSE, glm::value_ptr(view));
+
+	glUniformMatrix4fv(test1, 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(test2, 1, GL_FALSE, glm::value_ptr(projection));
-    glUniform3fv(test3, 1, glm::value_ptr(GlobalTransform.GetPosition()));
+
+
+	//glUniformMatrix4fv(test1, 1, GL_FALSE, glm::value_ptr(glm::mat4(1)));
+    //glUniformMatrix4fv(test2, 1, GL_FALSE, glm::value_ptr(glm::mat4(1)));
+
+	glUniform3fv(test3, 1, glm::value_ptr(GlobalTransform.GetPosition()));
+
+    glm::mat4 myTest = projection * view;
+
+
 }
 
 void CameraActor::AddRotation(float Rotation)

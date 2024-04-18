@@ -4,9 +4,17 @@ out vec4 FragColor;
 
 in vec3 Normal;
 in vec3 FragPos;
+in vec2 TexCoord;
 
+uniform sampler2D ourTexture;
+uniform int useTexture;
 
 uniform vec3 viewPos;
+
+uniform vec3 diffuse;
+uniform vec3 specular;
+uniform float shininess;
+
 
 struct DirectionalLight
 {
@@ -30,16 +38,29 @@ void main()
     dl.ambient = vec3(0.1);
 
     Material mat;
-    mat.diffuse = vec3(0,1,0);
-    mat.specular = vec3(.5);
-    mat.shininess = 64;
+    //mat.diffuse = vec3(0,1,0);
+    //mat.diffuse = vec3(.6,.6,0);
+    //mat.specular = vec3(.5);
+    //mat.shininess = 64;
+
+    if (useTexture == 0)
+    {
+        mat.diffuse = diffuse;
+    }
+    else
+    {
+        mat.diffuse = vec3(texture(ourTexture, TexCoord)) * diffuse;
+    }
+
+    mat.specular = specular;
+    mat.shininess = shininess;
 
     // diffuse angle
     float NdL = max(dot(Normal, -dl.direction), 0);
 
     // variables to calculate specular lighting
-    vec3 viewDir = normalize(FragPos - viewPos);
-    vec3 reflectDir = reflect(Normal, -dl.direction);
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(dl.direction, Normal);
     float VdR = pow(max(dot(viewDir, reflectDir), 0), mat.shininess); 
 
     // specular light
@@ -54,5 +75,6 @@ void main()
     // final color
     vec3 finalColor = ambientContribution + diffuseContribution + specularContribution;
 
-    FragColor = vec4(finalColor, 1);//texture(ourTexture, TexCoord);  
+    FragColor = vec4(finalColor, 1);
+    //FragColor = texture(ourTexture, TexCoord) * vec4(finalColor, 1);  
 }
