@@ -23,18 +23,32 @@ float TriangleCollision::StartTriangleCollision(Actor* inLandscape, glm::vec3 po
 	if (!mc) return 0;
 
 	//
+	glm::mat4 LandScapemat = inLandscape->GlobalTransform.GetTransformMatrix();
 
-	
+
+
 	Mesh* inMesh = mc->mesh;
 
 	for (auto tri : inMesh->triangles)
 	{
-		tri.P1 += inLandscape->GlobalTransform.GetPosition();
-		tri.P2 += inLandscape->GlobalTransform.GetPosition();
-		tri.P3 += inLandscape->GlobalTransform.GetPosition();
+		//tri.P1 += inLandscape->GlobalTransform.GetPosition();
+		//tri.P2 += inLandscape->GlobalTransform.GetPosition();
+		//tri.P3 += inLandscape->GlobalTransform.GetPosition();
 		//Triangle tri = inMesh.triangles[0];
-		glm::vec3 test = Barycentric(tri, idkPos, height);
 
+		//tri.P1 *= LandScapemat;
+		//tri.P2 *= LandScapemat;
+		glm::vec4 tester = LandScapemat * glm::vec4(tri.P1, 1);
+		tri.P1 = glm::vec3(tester);
+
+		tester = LandScapemat * glm::vec4(tri.P2, 1);
+		tri.P2 = glm::vec3(tester);
+
+		tester = LandScapemat * glm::vec4(tri.P3, 1);
+		tri.P3 = glm::vec3(tester);
+
+
+		glm::vec3 test = Barycentric(tri, idkPos, height);
 
 
 

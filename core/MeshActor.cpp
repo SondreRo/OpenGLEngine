@@ -3,10 +3,12 @@
 MeshActor::MeshActor()
 {
 	meshComponent = new MeshComponent;
+
 }
 
 void MeshActor::SetupMesh(Mesh* inMesh)
 {
 	meshComponent->mesh = inMesh;
-	components.push_back(meshComponent);
+	components.emplace_back(meshComponent);
+
 }

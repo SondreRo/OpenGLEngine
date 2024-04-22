@@ -8,6 +8,7 @@
 
 #include "Application.h"
 #include "Enemy.h"
+#include "MeshActor.h"
 #include "glm/vec3.hpp"
 
 int Window::CreatemyWindow()
@@ -135,9 +136,9 @@ void Window::ImguiSetup()
 		Application::get().EnableDrawDebugAfter = false;
 	}
 
-	bool Activate = dynamic_cast<Enemy*>(Application::get().GetActor("EnemyActor"))->Active;
-	ImGui::Checkbox("Enemy Activate", &Activate);
-	dynamic_cast<Enemy*>(Application::get().GetActor("EnemyActor"))->Active = Activate;
+	//bool Activate = dynamic_cast<Enemy*>(Application::get().GetActor("EnemyActor"))->Active;
+	//ImGui::Checkbox("Enemy Activate", &Activate);
+	//dynamic_cast<Enemy*>(Application::get().GetActor("EnemyActor"))->Active = Activate;
 	
 
 	float WalkSpeed = Application::get().character->CharacterSpeed;
@@ -155,19 +156,19 @@ void Window::ImguiSetup()
 
 	ImGui::PlotLines("FrameRate", testQueue.data(), 100);
 
-	// COLOR OF LINE
-	testcolor[0] = Application::get().curve_mesh->Color.x;
-	testcolor[1] = Application::get().curve_mesh->Color.y;
-	testcolor[2] = Application::get().curve_mesh->Color.z;
-	ImGui::ColorPicker3("color", testcolor);
-	
+	//// COLOR OF LINE
+	//testcolor[0] = Application::get().curve_mesh->Color.x;
+	//testcolor[1] = Application::get().curve_mesh->Color.y;
+	//testcolor[2] = Application::get().curve_mesh->Color.z;
+	//ImGui::ColorPicker3("color", testcolor);
+	//
 
-	Application::get().curve_mesh->Color.x = testcolor[0];
-	Application::get().curve_mesh->Color.y = testcolor[1];
-	Application::get().curve_mesh->Color.z = testcolor[2];
+	//Application::get().curve_mesh->Color.x = testcolor[0];
+	//Application::get().curve_mesh->Color.y = testcolor[1];
+	//Application::get().curve_mesh->Color.z = testcolor[2];
 
 
-	
+	//
 
 	if (testQueue.size() >= 100)
 	{
@@ -180,6 +181,7 @@ void Window::ImguiSetup()
 	MeshList();
 	ActorList();
 	Test();
+	ActorCreator();
 	LandScapeGenerator();
 	ImportMeshMenu();
 
@@ -491,26 +493,40 @@ void Window::ActorList()
 		{
 			for (auto component : SelectedActor->components)
 			{
+				if (component == nullptr)
+				{
+					continue;
+				}
+
 				ImGui::Button("Mesh Component");
 
 				if (MeshComponent* mc = dynamic_cast<MeshComponent*>(component))
 				{
-					ImGui::BeginListBox("Mesh");
-					std::string test = mc->mesh->DisplayName;
-					if (ImGui::Button(test.c_str()))
-					{
-						SelectedMesh = mc->mesh;
-					}
 
 					if (SelectedMesh)
 					{
-						std::string ButtonName = "Swap Mesh with: " + mc->mesh->DisplayName;
+						std::string ButtonName = "Swap Mesh with: " + SelectedMesh->DisplayName;
 						if (ImGui::Button(ButtonName.c_str()))
 						{
 							mc->mesh = SelectedMesh;
 
 						}
 					}
+
+					if (mc->mesh == nullptr)
+					{
+						continue;
+					}
+					ImGui::BeginListBox("Mesh");
+					
+
+					std::string test = mc->mesh->DisplayName;
+					if (ImGui::Button(test.c_str()))
+					{
+						SelectedMesh = mc->mesh;
+					}
+
+				
 				
 					
 					ImGui::EndListBox();
@@ -527,6 +543,31 @@ void Window::ActorList()
 
 	
 
+
+	ImGui::End();
+}
+
+void Window::ActorCreator()
+{
+	ImGui::Begin("ActorCreator");
+
+	//ActorDisplayName
+	ImGui::InputText("ActorName", ActorDisplayName, IM_ARRAYSIZE(ActorDisplayName));
+
+	if (!SelectedMesh)
+	{
+		ImGui::Text("Select Mesh");
+	}
+	else
+	{
+		if (ImGui::Button("CreateMeshActor"))
+		{
+			MeshActor* newActor = new MeshActor();
+			newActor->Name = ActorDisplayName;
+			newActor->SetupMesh(SelectedMesh);
+			Application::get().AddActorList(newActor, ActorDisplayName);
+		}
+	}
 
 	ImGui::End();
 }

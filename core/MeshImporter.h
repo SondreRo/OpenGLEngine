@@ -12,7 +12,7 @@ class MeshImporter {
 public:
 	void PrintTest();
 
-	Mesh* ImportAssimp(std::string RelativePath);
+	std::vector<Mesh*> ImportAssimp(std::string RelativePath);
 
 	void processNode(aiNode* node, const aiScene* scene);
 

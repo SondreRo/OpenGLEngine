@@ -5,13 +5,18 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+#include "Application.h"
+#include "AssetManager.h"
+#include "assimp/code/AssetLib/3MF/3MFXmlTags.h"
+
 void MeshImporter::PrintTest()
 {
 	std::cout << "TEST FROM ASSIM" << std::endl;
 }
 
-Mesh* MeshImporter::ImportAssimp(std::string RelativePath)
+std::vector<Mesh*> MeshImporter::ImportAssimp(std::string RelativePath)
 {
+    AssetManager::CopyFileToContent(RelativePath, AssetType::MeshType);
     meshes.clear();
 	std::cout << RelativePath << std::endl;
 	Assimp::Importer import;
@@ -32,7 +37,7 @@ Mesh* MeshImporter::ImportAssimp(std::string RelativePath)
         aiProcess_TransformUVCoords | // preprocess UV transformations (scaling, translation ...)
         aiProcess_FindInstances | // search for instanced meshes and remove them by references to one master
         aiProcess_LimitBoneWeights | // limit bone weights to 4 per vertex
-        aiProcess_OptimizeMeshes | // join small meshes, if possible;
+        //aiProcess_OptimizeMeshes | // join small meshes, if possible;
         aiProcess_PreTransformVertices | //-- fixes the transformation issue.
         aiProcess_SplitByBoneCount | // split meshes with too many bones. Necessary for our (limited) hardware skinning shader
         aiProcess_FlipUVs |
@@ -49,23 +54,40 @@ Mesh* MeshImporter::ImportAssimp(std::string RelativePath)
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
 		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
-		return nullptr;
+		return std::vector<Mesh*> ();
 	}
     directory = RelativePath.substr(0, RelativePath.find_last_of('/'));
+
+    int test = scene->mNumMeshes;
+    std::cout << "Num of meshes: " << test << "for " << RelativePath << std::endl;
+
 	processNode(scene->mRootNode, scene);
 
-    Mesh* toReturn = meshes[0];
-    toReturn->DisplayName = scene->mMeshes[0]->mName.C_Str();
-    toReturn->path = RelativePath;
-    return toReturn;
+
+    for (int i = 0; i < meshes.size(); ++i)
+    {
+        meshes[i]->DisplayName += " " + std::to_string(i);
+        meshes[i]->path = RelativePath;
+        Application::get().AddToMeshList(meshes[i], meshes[i]->DisplayName);
+        AssetManager::CreateIndexWhenImporting(meshes[i]);
+    }
+   
+    std::cout << "Amount of meshes i return: " << meshes.size() << std::endl;
+  
+    return meshes;
 }
 
 void MeshImporter::processNode(aiNode* node, const aiScene* scene)
 {
+    std::string NameOfNode = node->mName.C_Str();
+
     for (unsigned int i = 0; i < node->mNumMeshes; i++)
     {
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        meshes.push_back(processMesh(mesh, scene));
+        std::string NameMesh = mesh->mName.C_Str();
+
+        std::cout << "NodeName: " << NameOfNode << "  MeshName: " << NameMesh << std::endl;
+    	meshes.push_back(processMesh(mesh, scene));
     }
 
 
@@ -136,9 +158,9 @@ Mesh* MeshImporter::processMesh(aiMesh* mesh, const aiScene* scene)
             aiTextureType_SPECULAR, "texture_specular");
         textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
     }
-
+    
     Mesh* MeshToReturn = new Mesh(vertices, indices, textures);
-
+    MeshToReturn->DisplayName = mesh->mName.C_Str();
     if (indices.size() > 0)
     {
         MeshToReturn->UseElements = true;
@@ -195,6 +217,8 @@ unsigned int MeshImporter::TextureFromFile(std::string path)
 
     if (data)
     {
+        AssetManager::CopyFileToContent(filename, AssetType::TextureType);
+
         GLenum format = 0;
         if (nrComponents == 1)
             format = GL_RED;

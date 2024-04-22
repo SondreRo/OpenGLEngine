@@ -43,12 +43,14 @@ public:
 	void ImportMeshMenu();
 	void MeshList();
 	void ActorList();
-
+	void ActorCreator();
 	void PrintHello();
 private:
 
 	char DisplayName[100] = { 0 };
 	char ImportPath[300] = { 0 };
+
+	char ActorDisplayName[100] = { 0 };
 
 	bool LockScale = false;
 

@@ -18,6 +18,7 @@
 #include <Enemy.h>
 #include <CurveMesh.h>
 
+#include "AssetManager.h"
 
 
 Application& Application::get()
@@ -36,11 +37,11 @@ int Application::init()
 
 	mWindow->CreatemyWindow();
 	
-	shaderProgram.ReadShaderFile(SOURCE_DIRECTORY("core/shaders/VertexShader.txt"), SOURCE_DIRECTORY("core/shaders/FragmentShader.txt"));
+	shaderProgram.ReadShaderFile(SOURCE_DIRECTORY("core/shaders/VertexShader.vert"), SOURCE_DIRECTORY("core/shaders/FragmentShader.frag"));
 	shaderProgram.CompileShaders();
 	shaderProgram.CreateProgram();
 
-	LineshaderProgram.ReadShaderFile(SOURCE_DIRECTORY("core/shaders/lineShaders/LineVertexShader.txt"), SOURCE_DIRECTORY("core/shaders/lineShaders/LineFragmentShader.txt"));
+	LineshaderProgram.ReadShaderFile(SOURCE_DIRECTORY("core/shaders/lineShaders/LineVertexShader.vert"), SOURCE_DIRECTORY("core/shaders/lineShaders/LineFragmentShader.frag"));
 	LineshaderProgram.CompileShaders();
 	LineshaderProgram.CreateProgram();
 
@@ -68,9 +69,9 @@ int Application::Run()
 	Transform SceneTransform;
 
 
-	curve_mesh = new CurveMesh();
+	//curve_mesh = new CurveMesh();
 
-	curve_mesh->Bind();
+	//curve_mesh->Bind();
 
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
@@ -79,7 +80,6 @@ int Application::Run()
 	while (!glfwWindowShouldClose(mWindow->mWindow))
 	{
 	
-
 
 
 
@@ -124,8 +124,8 @@ int Application::Run()
 		glUniform1f(test4, timetest);
 
 
-		Actor* temp1 = GetActor("EnemyActor");
-		Actor* temp2 = GetActor("CharacterActor");
+		//Actor* temp1 = GetActor("EnemyActor");
+		//Actor* temp2 = GetActor("CharacterActor");
 
 		//if (temp1 && temp2)
 		//{
@@ -137,8 +137,8 @@ int Application::Run()
 		//	glm::vec3 p2 = ((p1 * .5f) + (p3 * .5f)) + glm::vec3(0, Distance, 0);
 
 		//	
-		//	curve_mesh->DrawLine(p1, p2, p3, 0.01);
-		//	curve_mesh->Draw(LineshaderProgram, false, glm::mat4(2));
+		//	/*curve_mesh->DrawLine(p1, p2, p3, 0.01);
+		//	curve_mesh->Draw(LineshaderProgram, false, glm::mat4(2));*/
 		//}
 
 		
@@ -185,9 +185,9 @@ Actor* Application::GetActor(std::string ActorName)
 
 Mesh* Application::GetMesh(std::string meshName)
 {
-	if (Mesh* newMesh = mMeshes[meshName])
+	if (mMeshes.count(meshName) > 0)
 	{
-		return newMesh;
+		return mMeshes[meshName];
 	}
 	
 	std::cout << "Cant find " << meshName << std::endl;
@@ -213,17 +213,12 @@ void Application::SetupMeshes()
 	mMeshes["CharacterMesh"] = characterMesh;
 
 
-	Mesh* monkeyMesh = mesh_importer.ImportAssimp(SOURCE_DIRECTORY("Meshes/Suzanne.fbx"));
-	monkeyMesh->DisplayName = "MonkeyMesh";
-	mMeshes["MonkeyMesh"] = monkeyMesh;
+	mesh_importer.ImportAssimp(SOURCE_DIRECTORY("Meshes/Suzanne.fbx"));
 
-	Mesh* houseMesh = mesh_importer.ImportAssimp(SOURCE_DIRECTORY("Meshes/House.fbx"));
-	houseMesh->DisplayName = "HouseMesh";
-	mMeshes["HouseMesh"] = houseMesh;
+	mesh_importer.ImportAssimp(SOURCE_DIRECTORY("Meshes/House.fbx"));
 
-	Mesh* blenderBoxMesh = mesh_importer.ImportAssimp(SOURCE_DIRECTORY("Meshes/Box.fbx"));
-	blenderBoxMesh->DisplayName = "blenderBoxMesh";
-	mMeshes["blenderBoxMesh"] = blenderBoxMesh;
+	mesh_importer.ImportAssimp(SOURCE_DIRECTORY("Meshes/Box.fbx"));
+	
 
 	Mesh* triangleMesh = new Mesh();
 	triangleMesh->mVertices = {
@@ -237,9 +232,8 @@ void Application::SetupMeshes()
 	mMeshes["TriangleMesh"] = triangleMesh;
 
 
-	Mesh* pawnTextureThingyMesh = mesh_importer.ImportAssimp("C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx");
-	pawnTextureThingyMesh->DisplayName = "pawnTextureThingyMesh";
-	mMeshes["pawnTextureThingyMesh"] = pawnTextureThingyMesh;
+	mesh_importer.ImportAssimp("C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx");
+	
 
 
 
@@ -248,7 +242,9 @@ void Application::SetupMeshes()
 	line_mesh = new LineMesh();
 	line_mesh->mVertices.emplace_back(glm::vec3(0));
 	line_mesh->mVertices.emplace_back(glm::vec3(10));
-	
+
+
+	//AssetManager::CreateFileFromContentFolder();
 }
 
 void Application::BindMeshes()
@@ -270,7 +266,7 @@ void Application::SetupActors()
 	mActors["LandScapeMeshActor"] = LandScapeMeshActor;
 	actors.push_back(LandScapeMeshActor);
 
-	MeshActor* MonkeyActor = new MeshActor();
+	/*MeshActor* MonkeyActor = new MeshActor();
 	MonkeyActor->Name = "MonkeyActor";
 	MonkeyActor->SetupMesh(GetMesh("MonkeyMesh"));
 	MonkeyActor->LocalTransform.AddPosition(glm::vec3(10, 1, 10));
@@ -295,7 +291,7 @@ void Application::SetupActors()
 	TriangleActor->Name = "TriangleActor";
 	TriangleActor->SetupMesh(GetMesh("TriangleMesh"));
 	mActors["TriangleActor"] = TriangleActor;
-	LandScapeMeshActor->Children.push_back(TriangleActor);
+	LandScapeMeshActor->Children.push_back(TriangleActor);*/
 
 	character = new Character();
 	character->Name = "Character";
@@ -312,12 +308,12 @@ void Application::SetupActors()
 	character->Children.push_back(camActor);
 
 
-	Enemy* enemy = new Enemy();
+	/*Enemy* enemy = new Enemy();
 	enemy->Name = "Enemy";
 	enemy->SetupCharacterMesh(GetMesh("CharacterMesh"));
 	mActors["EnemyActor"] = enemy;
 	actors.push_back(enemy);
-	enemy->GlobalTransform.SetPosition(glm::vec3(30, 2, 30));
+	enemy->GlobalTransform.SetPosition(glm::vec3(30, 2, 30));*/
 
 }
 
@@ -467,17 +463,63 @@ void Application::RemakeLandscape(float maxX, float maxY, float delta, int type)
 
 Mesh* Application::CreateAndRegisterMesh(std::string Path, std::string DisplayName)
 {
-	Mesh* newMesh = mesh_importer.ImportAssimp(Path);
+	std::vector<Mesh*> newMeshList = mesh_importer.ImportAssimp(Path);
 
-	if (!DisplayName.empty())
+	for (auto &newMesh : newMeshList)
 	{
-		newMesh->DisplayName = DisplayName;
+
+		if (!DisplayName.empty())
+		{
+			newMesh->DisplayName = DisplayName;
+
+		}
+
+		mMeshes[newMesh->DisplayName] = newMesh;
+
+
+		newMesh->Bind();
 
 	}
 
-	mMeshes[newMesh->DisplayName] = newMesh;
+
+	
+	return nullptr;
+}
+
+bool Application::AddToMeshList(Mesh* inMesh, std::string Name)
+{
+	if (mMeshes.count(Name) > 0)
+	{
+		if (inMesh->path == mMeshes[Name]->path)
+		{
+			inMesh->DisplayName = Name;
+			mMeshes[Name] = inMesh;
+			std::cout << "Overiding Mesh bcs same path" << std::endl;
+			return true;
+		}
+		else
+		{
+			std::cout << Name << " already exists, trying to add 1" << std::endl;
+			Name += "1";
+			AddToMeshList(inMesh, Name);
+			return false;
+		}
+		
+	}
+	else
+	{
+		inMesh->DisplayName = Name;
+		mMeshes[Name] = inMesh;
+		return true;
+	}
 
 
-	newMesh->Bind();
-	return newMesh;
+}
+
+bool Application::AddActorList(Actor* inActor, std::string Name)
+{
+	inActor->Name = Name;
+	mActors[Name] = inActor;
+	actors.push_back(inActor);
+	return true;
 }

@@ -35,7 +35,7 @@ public:
 
 
 	LineMesh* line_mesh;
-	CurveMesh* curve_mesh;
+	//CurveMesh* curve_mesh;
 
 	std::unordered_map <std::string, Mesh*> mMeshes; 
 	std::unordered_map <std::string, Actor*> mActors; 
@@ -66,6 +66,9 @@ public:
 	void RemakeLandscape(float maxX, float maxY, float delta, int type);
 
 	Mesh* CreateAndRegisterMesh(std::string Path, std::string DisplayName = "");
+
+	bool AddToMeshList(Mesh* inMesh, std::string Name);
+	bool AddActorList(Actor* inActor, std::string Name);
 
 private:
 	Application() = default;
