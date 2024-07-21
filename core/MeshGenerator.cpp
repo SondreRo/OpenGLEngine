@@ -16,7 +16,8 @@ float MeshGenerator::Function3(float X, float Y)
 }
 float MeshGenerator::Function4(float X, float Y)
 {
-	return (pow(X, -1) + (pow(Y, 2) / 10))/20;
+	return sin(10 * (X * X + Y * Y)) / 10;
+	//return (pow(X, -1) + (pow(Y, 2) / 10))/20;
 }
 
 glm::vec3 MeshGenerator::GetNormal(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3)

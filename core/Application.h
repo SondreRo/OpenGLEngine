@@ -74,7 +74,7 @@ private:
 	Application() = default;
 	~Application() = default;
 	inline static Application* instance = nullptr;
-
+	
 	MeshImporter mesh_importer;
 
 

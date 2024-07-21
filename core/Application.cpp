@@ -447,8 +447,9 @@ void Application::MouseMoveCallback(GLFWwindow* window, double xpos, double ypos
 void Application::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
 	std::cout << "FrameSizeCallback" << std::endl;
-	Application::mWindow->Height = height;
-	Application::mWindow->Width = width;
+	
+	mWindow->Height = height;
+	mWindow->Width = width;
 	glViewport(0, 0, width, height);
 }
 

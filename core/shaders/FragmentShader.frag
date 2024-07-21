@@ -7,7 +7,7 @@ in vec3 FragPos;
 in vec2 TexCoord;
 
 uniform sampler2D ourTexture;
-uniform int useTexture;
+uniform int useTexture = 0;
 
 uniform vec3 viewPos;
 
