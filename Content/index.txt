@@ -1,0 +1,151 @@
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Cube.001 C:\Users\soroe\Documents\CubeNoTexture.fbx
+1 Cube.001 C:\Users\soroe\Documents\CubeNoTexture.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Cube.0031 C:\Users\soroe\Documents\Blender\KioskSimulator\Structures\Shelf.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Icosphere C:\Users\soroe\Documents\RockBox.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Cylinder.003 C:\Users\soroe\Documents\Cart.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Cube.005 C:\Users\soroe\Documents\Conveyor.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh1 C:\Users\soroe\Documents\Blender\PawnTextureThingy.fbx
+1 MySecondMesh1 C:\Users\soroe\Documents\Blender\PawnTextureThingy.fbx
+1 MySecondMesh1 C:\Users\soroe\Documents\Blender\PawnTextureThingy.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 ../../../Meshes/Suzanne.fbx
+1 Cube.002 ../../../Meshes/House.fbx
+1 Cube.003 ../../../Meshes/Box.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 MySecondMesh C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 ../../../Meshes/Suzanne.fbx 0 ../../../Meshes/Suzanne.fbx
+1 ../../../Meshes/House.fbx 0 ../../../Meshes/House.fbx
+1 ../../../Meshes/Box.fbx 0 ../../../Meshes/Box.fbx
+1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx 0 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx 1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx 2 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 ../../../Meshes/Suzanne.fbx 0 ../../../Meshes/Suzanne.fbx
+1 ../../../Meshes/House.fbx 0 ../../../Meshes/House.fbx
+1 ../../../Meshes/Box.fbx 0 ../../../Meshes/Box.fbx
+1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx 0 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx 1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx 2 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 0 ../../../Meshes/Suzanne.fbx
+1 Cube.002 0 ../../../Meshes/House.fbx
+1 Cube.003 0 ../../../Meshes/Box.fbx
+1 MySecondMesh 0 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 StrangeBoxMesh 1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 NormalBoxMesh 2 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 0 ../../../Meshes/Suzanne.fbx
+1 Cube.002 0 ../../../Meshes/House.fbx
+1 Cube.003 0 ../../../Meshes/Box.fbx
+1 MySecondMesh 0 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 StrangeBoxMesh 1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 NormalBoxMesh 2 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 0 ../../../Meshes/Suzanne.fbx
+1 Cube.002 0 ../../../Meshes/House.fbx
+1 Cube.003 0 ../../../Meshes/Box.fbx
+1 MySecondMesh 0 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 StrangeBoxMesh 1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 NormalBoxMesh 2 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 0 ../../../Meshes/Suzanne.fbx
+1 Cube.002 0 ../../../Meshes/House.fbx
+1 Cube.003 0 ../../../Meshes/Box.fbx
+1 MySecondMesh 0 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 StrangeBoxMesh 1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 NormalBoxMesh 2 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 0 ../../../Meshes/Suzanne.fbx
+1 Cube.002 0 ../../../Meshes/House.fbx
+1 Cube.003 0 ../../../Meshes/Box.fbx
+1 MySecondMesh 0 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 StrangeBoxMesh 1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 NormalBoxMesh 2 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 0 ../../../Meshes/Suzanne.fbx
+1 Cube.002 0 ../../../Meshes/House.fbx
+1 Cube.003 0 ../../../Meshes/Box.fbx
+1 MySecondMesh 0 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 StrangeBoxMesh 1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 NormalBoxMesh 2 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 0 ../../../Meshes/Suzanne.fbx
+1 Cube.002 0 ../../../Meshes/House.fbx
+1 Cube.003 0 ../../../Meshes/Box.fbx
+1 MySecondMesh 0 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 StrangeBoxMesh 1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 NormalBoxMesh 2 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 0 ../../../Meshes/Suzanne.fbx
+1 Cube.002 0 ../../../Meshes/House.fbx
+1 Cube.003 0 ../../../Meshes/Box.fbx
+1 MySecondMesh 0 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 StrangeBoxMesh 1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 NormalBoxMesh 2 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 Suzanne.001 0 ../../../Meshes/Suzanne.fbx
+1 Cube.002 0 ../../../Meshes/House.fbx
+1 Cube.003 0 ../../../Meshes/Box.fbx
+1 MySecondMesh 0 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 StrangeBoxMesh 1 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
+1 NormalBoxMesh 2 C:/Users/soroe/Documents/Blender/PawnTextureThingy.fbx
